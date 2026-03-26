@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theo 段晓坤</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --accent: #0984e3;
+            --accent-hover: #0770c2;
+            --card-bg: #ffffff;
+            --border: #e9ecef;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --tag-bg: #e8f4fd;
+            --tag-text: #0984e3;
+            --code-bg: #f1f3f5;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #eaeaea;
+            --text-secondary: #b8b8b8;
+            --accent: #4dabf7;
+            --accent-hover: #74c0fc;
+            --card-bg: #1f1f38;
+            --border: #2d2d4a;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --tag-bg: #2d2d4a;
+            --tag-text: #4dabf7;
+            --code-bg: #2d2d4a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--shadow);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Profile */
+        .profile {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 48px 40px 40px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .profile-inner {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0984e3, #a29bfe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(9, 132, 227, 0.3);
+        }
+
+        .profile-info h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-info .subtitle {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .profile-info .bio {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .social-link svg {
+            flex-shrink: 0;
+        }
+
+        /* Section */
+        .section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 18px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* Projects Table */
+        .project-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .project-table tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s ease;
+        }
+
+        .project-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .project-table tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        .project-table td {
+            padding: 14px 10px;
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+
+        .project-table td:first-child {
+            width: 36px;
+            font-size: 1.2rem;
+            padding-right: 4px;
+        }
+
+        .project-table td:nth-child(2) {
+            width: 160px;
+        }
+
+        .project-table a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .project-table a:hover {
+            text-decoration: underline;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Writing Section */
+        .writing-list {
+            list-style: none;
+        }
+
+        .writing-list li {
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+        }
+
+        .writing-list li:first-child {
+            padding-top: 0;
+        }
+
+        .writing-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .writing-list a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .writing-list a:hover {
+            color: var(--accent);
+        }
+
+        .writing-list .writing-meta {
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            margin-top: 3px;
+        }
+
+        .writing-more {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .writing-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        footer code {
+            background: var(--code-bg);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .profile-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .profile {
+                padding: 32px 20px;
+            }
+
+            .section {
+                padding: 24px 18px;
+            }
+
+            .project-table td:nth-child(2) {
+                width: 120px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile, .section {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+    </button>
+
+    <div class="container">
+        <!-- Profile -->
+        <section class="profile">
+            <div class="profile-inner">
+                <div class="avatar">T</div>
+                <div class="profile-info">
+                    <h1>Theo 段晓坤</h1>
+                    <p class="subtitle">ByteDance · Beijing</p>
+                    <p class="bio">21岁，字节跳动。喜欢做工具，想做有意思的产品。</p>
+                    <div class="social-links">
+                        <a href="https://github.com/XiaokunDuan" class="social-link" target="_blank" rel="noopener">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="https://x.com/TechMGR" class="social-link" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                            @TechMGR
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section">
+            <h2 class="section-title">Projects</h2>
+            <table class="project-table">
+                <tbody>
+                    <tr>
+                        <td>🛠️</td>
+                        <td><a href="https://github.com/XiaokunDuan/pms-helper" target="_blank" rel="noopener">pms-helper</a></td>
+                        <td class="project-desc">Project management assistant for product managers. Streamline workflows and automate routine tasks.<br>面向产品经理的项目管理助手，简化工作流程，自动化日常任务。</td>
+                    </tr>
+                    <tr>
+                        <td>🚧</td>
+                        <td><em style="color: var(--text-secondary); font-size: 0.9rem;">building...</em></td>
+                        <td class="project-desc">Stay tuned. / 敬请期待。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Writing -->
+        <section class="section">
+            <h2 class="section-title">Writing</h2>
+            <ul class="writing-list">
+                <li>
+                    <a href="https://paragraph.xyz/@xiaokun" target="_blank" rel="noopener">我的写作在 Paragraph →</a>
+                    <p class="writing-meta">paragraph.xyz/@xiaokun</p>
+                </li>
+            </ul>
+            <a href="https://paragraph.xyz/@xiaokun" class="writing-more" target="_blank" rel="noopener">All posts →</a>
+        </section>
+
+        <footer>
+            <p><code>npm install xiaokun</code></p>
+            <p style="margin-top: 8px;">© 2026 Theo 段晓坤</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                icon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                icon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        (function () {
+            const saved = localStorage.getItem('theme');
+            const icon = document.getElementById('theme-icon');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.textContent = '☀️';
+            }
+        })();
+    </script>
+</body>
+</html>
