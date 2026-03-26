@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theo 段晓坤</title>
+    <title>Theo Duan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
@@ -416,8 +416,8 @@
         <section class="hero">
             <div class="hero-main">
                 <div class="hero-meta">
-                    <img src="assets/avatar.jpg" class="avatar" alt="Theo 段晓坤">
-                    <span class="meta-label" data-i18n="metaLabel">Theo Duan / 段晓坤</span>
+                    <img src="assets/avatar.jpg" class="avatar" alt="Theo Duan">
+                    <span class="meta-label" data-i18n="metaLabel">Theo Duan</span>
                 </div>
                 <h1 data-i18n="heroName">Theo Duan</h1>
                 <p class="hero-tagline" data-i18n="heroTagline">Build tools people actually want to use.</p>
@@ -488,8 +488,9 @@
     <script>
         const translations = {
             en: {
+                title: "Theo Duan",
                 pageLang: "en",
-                metaLabel: "Theo Duan / 段晓坤",
+                metaLabel: "Theo Duan",
                 heroName: "Theo Duan",
                 heroTagline: "Build tools people actually want to use.",
                 heroCopy: "I build products in <strong>Beijing</strong> and write code too. I like making complex workflows feel simple and making dense information easier to understand.",
@@ -506,24 +507,26 @@
                 writingTitle: "Occasional notes on products, tools, and the internet."
             },
             zh: {
+                title: "段晓坤",
                 pageLang: "zh-CN",
-                metaLabel: "Theo Duan / 段晓坤",
-                heroName: "Theo 段晓坤",
-                heroTagline: "Build tools people actually want to use.",
+                metaLabel: "段晓坤",
+                heroName: "段晓坤",
+                heroTagline: "做人们真正愿意使用的工具。",
                 heroCopy: "我在<strong>北京</strong>做产品，也写代码。更喜欢把复杂流程做顺，把复杂信息讲清楚。",
-                labelAbout: "About",
-                aboutTitle: "Not a resume.",
-                labelWork: "Selected Work",
+                labelAbout: "关于",
+                aboutTitle: "不是简历。",
+                labelWork: "作品",
                 readerDesc: "面向长内容阅读的 AI 工作台，用来摘要、追问和整理真正重要的信息。",
                 readerMeta: "阅读系统",
                 newsDesc: "面向日常新闻监控的 LLM 辅助 RSS 流水线，支持摘要、排序以及多渠道分发。",
                 newsMeta: "新闻情报",
                 hamDesc: "一套围绕真实工作流整理的 macOS 自动化配置，覆盖窗口控制、应用切换、Obsidian 捕获与飞书导出。",
                 hamMeta: "Mac 自动化",
-                labelWriting: "Writing",
+                labelWriting: "写作",
                 writingTitle: "偶尔写一点关于产品、工具和互联网的东西。"
             },
             ja: {
+                title: "Theo Duan",
                 pageLang: "ja",
                 metaLabel: "Theo Duan / 段晓坤",
                 heroName: "Theo Duan",
@@ -542,6 +545,7 @@
                 writingTitle: "プロダクト、ツール、インターネットについて時々書いています。"
             },
             fr: {
+                title: "Theo Duan",
                 pageLang: "fr",
                 metaLabel: "Theo Duan / 段晓坤",
                 heroName: "Theo Duan",
@@ -560,6 +564,7 @@
                 writingTitle: "Quelques notes sur les produits, les outils et l’internet."
             },
             ru: {
+                title: "Theo Duan",
                 pageLang: "ru",
                 metaLabel: "Theo Duan / 段晓坤",
                 heroName: "Theo Duan",
@@ -604,13 +609,14 @@
             } else if (lang === "ru") {
                 el.textContent = `${age} лет. ${baseText}`;
             } else {
-                el.textContent = `${age}. ${baseText}`;
+                el.textContent = `${age} years old. ${baseText}`;
             }
         }
 
         function setLanguage(lang) {
             const dict = translations[lang] || translations.en;
             document.documentElement.lang = dict.pageLang;
+            document.title = dict.title || translations.en.title;
             localStorage.setItem("language", lang);
 
             document.querySelectorAll("[data-i18n]").forEach((node) => {
