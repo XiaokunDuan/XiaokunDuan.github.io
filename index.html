@@ -353,7 +353,7 @@
                 <div class="profile-info">
                     <h1>Theo 段晓坤</h1>
                     <p class="subtitle">ByteDance · Beijing</p>
-                    <p class="bio">21岁，字节跳动。喜欢做工具，想做有意思的产品。</p>
+                    <p class="bio" id="bio-age">字节跳动。喜欢做工具，想做有意思的产品。</p>
                     <div class="social-links">
                         <a href="https://github.com/XiaokunDuan" class="social-link" target="_blank" rel="noopener">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -431,6 +431,17 @@
                 document.documentElement.setAttribute('data-theme', 'dark');
                 icon.textContent = '☀️';
             }
+        })();
+
+        (function () {
+            // Compute "today" in Asia/Shanghai (UTC+8) to be consistent for all visitors
+            const shanghaiNow = new Date(Date.now() + 8 * 3600000);
+            const y = shanghaiNow.getUTCFullYear();
+            const m = shanghaiNow.getUTCMonth();  // 0-indexed
+            const d = shanghaiNow.getUTCDate();
+            const age = y - 2004 - (m < 2 || (m === 2 && d < 27) ? 1 : 0);
+            const el = document.getElementById('bio-age');
+            if (el) el.textContent = age + '岁，' + el.textContent;
         })();
     </script>
 </body>
