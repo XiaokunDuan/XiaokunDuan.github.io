@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,11 +75,26 @@
             color: inherit;
         }
 
-        .theme-toggle {
+        .controls {
             position: fixed;
             top: 22px;
             right: 22px;
             z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lang-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .lang-btn,
+        .theme-toggle {
             border: none;
             background: none;
             color: var(--muted);
@@ -91,8 +106,19 @@
             transition: color 0.16s ease;
         }
 
+        .lang-btn {
+            opacity: 0.58;
+        }
+
+        .lang-btn.is-active {
+            color: var(--text);
+            opacity: 1;
+        }
+
+        .lang-btn:hover,
         .theme-toggle:hover {
             color: var(--text);
+            opacity: 1;
         }
 
         .page {
@@ -375,20 +401,28 @@
     </style>
 </head>
 <body>
-    <button class="theme-toggle" onclick="toggleTheme()">dark</button>
+        <div class="controls">
+        <div class="lang-switcher" aria-label="Language switcher">
+            <button class="lang-btn is-active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">中文</button>
+            <button class="lang-btn" data-lang="ja" onclick="setLanguage('ja')">日本語</button>
+            <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">FR</button>
+            <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">dark</button>
+    </div>
 
     <main class="page">
         <section class="hero">
             <div class="hero-main">
                 <div class="hero-meta">
                     <img src="assets/avatar.jpg" class="avatar" alt="Theo 段晓坤">
-                    <span class="meta-label">Theo Duan / 段晓坤</span>
+                    <span class="meta-label" data-i18n="metaLabel">Theo Duan / 段晓坤</span>
                 </div>
-                <h1>Theo 段晓坤</h1>
-                <p class="hero-tagline">Build tools people actually want to use.</p>
+                <h1 data-i18n="heroName">Theo Duan</h1>
+                <p class="hero-tagline" data-i18n="heroTagline">Build tools people actually want to use.</p>
                 <p class="hero-copy">
-                    我在<strong>北京</strong>做产品，也写代码。
-                    更喜欢把复杂流程做顺，把复杂信息讲清楚。
+                    <span data-i18n-html="heroCopy">I build products in <strong>Beijing</strong> and write code too. I like making complex workflows feel simple and making dense information easier to understand.</span>
                 </p>
                 <nav class="hero-links">
                     <a href="https://github.com/XiaokunDuan" target="_blank" rel="noopener">GitHub</a>
@@ -400,46 +434,46 @@
 
         <div class="layout">
             <section class="section">
-                <div class="section-label">About</div>
+                <div class="section-label" data-i18n="labelAbout">About</div>
                 <div class="section-body">
-                    <h2 class="section-title">Not a resume.</h2>
-                    <p class="about-text" id="bio-age">在北京做产品。喜欢做工具，把复杂的东西讲清楚。</p>
+                    <h2 class="section-title" data-i18n="aboutTitle">Not a resume.</h2>
+                    <p class="about-text" id="bio-age" data-age-en="I build products in Beijing. I like making tools and explaining complicated things clearly." data-age-zh="在北京做产品。喜欢做工具，把复杂的东西讲清楚。">I build products in Beijing. I like making tools and explaining complicated things clearly.</p>
                 </div>
             </section>
 
             <section class="section">
-                <div class="section-label">Selected Work</div>
+                <div class="section-label" data-i18n="labelWork">Selected Work</div>
                 <div class="section-body projects">
                     <article class="project">
                         <div>
                             <a class="project-link" href="https://github.com/XiaokunDuan/reader" target="_blank" rel="noopener">reader</a>
-                            <p class="project-desc">AI-assisted reading workspace for long-form content, built for summarizing, questioning, and structuring what matters.</p>
+                            <p class="project-desc" data-i18n="readerDesc">AI-assisted reading workspace for long-form content, built for summarizing, questioning, and structuring what matters.</p>
                         </div>
-                        <div class="project-meta">Reading System</div>
+                        <div class="project-meta" data-i18n="readerMeta">Reading System</div>
                     </article>
 
                     <article class="project">
                         <div>
                             <a class="project-link" href="https://github.com/XiaokunDuan/newsRSS" target="_blank" rel="noopener">newsRSS</a>
-                            <p class="project-desc">LLM-assisted RSS intelligence pipeline for daily news monitoring, ranking, and delivery across Markdown, email, and Telegram.</p>
+                            <p class="project-desc" data-i18n="newsDesc">LLM-assisted RSS intelligence pipeline for daily news monitoring, ranking, and delivery across Markdown, email, and Telegram.</p>
                         </div>
-                        <div class="project-meta">News Intelligence</div>
+                        <div class="project-meta" data-i18n="newsMeta">News Intelligence</div>
                     </article>
 
                     <article class="project">
                         <div>
                             <a class="project-link" href="https://github.com/XiaokunDuan/hammerspoon-config" target="_blank" rel="noopener">hammerspoon-config</a>
-                            <p class="project-desc">A personal macOS automation stack that ties together window control, app launching, Obsidian capture, and Feishu export workflows.</p>
+                            <p class="project-desc" data-i18n="hamDesc">A personal macOS automation stack that ties together window control, app launching, Obsidian capture, and Feishu export workflows.</p>
                         </div>
-                        <div class="project-meta">Mac Automation</div>
+                        <div class="project-meta" data-i18n="hamMeta">Mac Automation</div>
                     </article>
                 </div>
             </section>
 
             <section class="section">
-                <div class="section-label">Writing</div>
+                <div class="section-label" data-i18n="labelWriting">Writing</div>
                 <div class="section-body">
-                    <h2 class="section-title">Occasional notes on products, tools, and the internet.</h2>
+                    <h2 class="section-title" data-i18n="writingTitle">Occasional notes on products, tools, and the internet.</h2>
                     <a href="https://paragraph.xyz/@xiaokun" class="writing-link" target="_blank" rel="noopener">paragraph.xyz/@xiaokun</a>
                 </div>
             </section>
@@ -452,6 +486,150 @@
     </main>
 
     <script>
+        const translations = {
+            en: {
+                pageLang: "en",
+                metaLabel: "Theo Duan / 段晓坤",
+                heroName: "Theo Duan",
+                heroTagline: "Build tools people actually want to use.",
+                heroCopy: "I build products in <strong>Beijing</strong> and write code too. I like making complex workflows feel simple and making dense information easier to understand.",
+                labelAbout: "About",
+                aboutTitle: "Not a resume.",
+                labelWork: "Selected Work",
+                readerDesc: "AI-assisted reading workspace for long-form content, built for summarizing, questioning, and structuring what matters.",
+                readerMeta: "Reading System",
+                newsDesc: "LLM-assisted RSS intelligence pipeline for daily news monitoring, ranking, and delivery across Markdown, email, and Telegram.",
+                newsMeta: "News Intelligence",
+                hamDesc: "A personal macOS automation stack that ties together window control, app launching, Obsidian capture, and Feishu export workflows.",
+                hamMeta: "Mac Automation",
+                labelWriting: "Writing",
+                writingTitle: "Occasional notes on products, tools, and the internet."
+            },
+            zh: {
+                pageLang: "zh-CN",
+                metaLabel: "Theo Duan / 段晓坤",
+                heroName: "Theo 段晓坤",
+                heroTagline: "Build tools people actually want to use.",
+                heroCopy: "我在<strong>北京</strong>做产品，也写代码。更喜欢把复杂流程做顺，把复杂信息讲清楚。",
+                labelAbout: "About",
+                aboutTitle: "Not a resume.",
+                labelWork: "Selected Work",
+                readerDesc: "面向长内容阅读的 AI 工作台，用来摘要、追问和整理真正重要的信息。",
+                readerMeta: "阅读系统",
+                newsDesc: "面向日常新闻监控的 LLM 辅助 RSS 流水线，支持摘要、排序以及多渠道分发。",
+                newsMeta: "新闻情报",
+                hamDesc: "一套围绕真实工作流整理的 macOS 自动化配置，覆盖窗口控制、应用切换、Obsidian 捕获与飞书导出。",
+                hamMeta: "Mac 自动化",
+                labelWriting: "Writing",
+                writingTitle: "偶尔写一点关于产品、工具和互联网的东西。"
+            },
+            ja: {
+                pageLang: "ja",
+                metaLabel: "Theo Duan / 段晓坤",
+                heroName: "Theo Duan",
+                heroTagline: "Build tools people actually want to use.",
+                heroCopy: "<strong>北京</strong>でプロダクトをつくり、コードも書いています。複雑なワークフローを自然にし、密度の高い情報をわかりやすくするのが好きです。",
+                labelAbout: "About",
+                aboutTitle: "Not a resume.",
+                labelWork: "Selected Work",
+                readerDesc: "長い文章や資料を要約し、質問し、構造化して理解するための AI 読書ワークスペース。",
+                readerMeta: "Reading System",
+                newsDesc: "日々のニュース監視のための LLM 支援 RSS パイプライン。要約、順位付け、複数チャネル配信に対応。",
+                newsMeta: "News Intelligence",
+                hamDesc: "ウィンドウ操作、アプリ起動、Obsidian キャプチャ、Feishu エクスポートをつなぐ macOS 自動化スタック。",
+                hamMeta: "Mac Automation",
+                labelWriting: "Writing",
+                writingTitle: "プロダクト、ツール、インターネットについて時々書いています。"
+            },
+            fr: {
+                pageLang: "fr",
+                metaLabel: "Theo Duan / 段晓坤",
+                heroName: "Theo Duan",
+                heroTagline: "Build tools people actually want to use.",
+                heroCopy: "Je conçois des produits à <strong>Beijing</strong> et j’écris aussi du code. J’aime rendre les workflows complexes plus fluides et les informations denses plus claires.",
+                labelAbout: "About",
+                aboutTitle: "Not a resume.",
+                labelWork: "Selected Work",
+                readerDesc: "Un espace de lecture assisté par l’IA pour résumer, questionner et structurer les contenus longs.",
+                readerMeta: "Reading System",
+                newsDesc: "Une pipeline RSS assistée par LLM pour la veille quotidienne, le classement et la diffusion via Markdown, email et Telegram.",
+                newsMeta: "News Intelligence",
+                hamDesc: "Une stack d’automatisation macOS qui relie contrôle des fenêtres, lancement d’apps, capture Obsidian et export Feishu.",
+                hamMeta: "Mac Automation",
+                labelWriting: "Writing",
+                writingTitle: "Quelques notes sur les produits, les outils et l’internet."
+            },
+            ru: {
+                pageLang: "ru",
+                metaLabel: "Theo Duan / 段晓坤",
+                heroName: "Theo Duan",
+                heroTagline: "Build tools people actually want to use.",
+                heroCopy: "Я делаю продукты в <strong>Пекине</strong> и тоже пишу код. Мне нравится упрощать сложные рабочие процессы и делать плотную информацию понятнее.",
+                labelAbout: "About",
+                aboutTitle: "Not a resume.",
+                labelWork: "Selected Work",
+                readerDesc: "AI-платформа для чтения длинных материалов: краткие выводы, вопросы и структурирование действительно важного.",
+                readerMeta: "Reading System",
+                newsDesc: "RSS-конвейер с поддержкой LLM для ежедневного мониторинга новостей, ранжирования и доставки через Markdown, email и Telegram.",
+                newsMeta: "News Intelligence",
+                hamDesc: "Персональный стек автоматизации macOS: управление окнами, запуск приложений, захват в Obsidian и экспорт из Feishu.",
+                hamMeta: "Mac Automation",
+                labelWriting: "Writing",
+                writingTitle: "Иногда пишу о продуктах, инструментах и интернете."
+            }
+        };
+
+        function updateAgeText(lang) {
+            const shanghaiNow = new Date(Date.now() + 8 * 3600000);
+            const y = shanghaiNow.getUTCFullYear();
+            const m = shanghaiNow.getUTCMonth();
+            const d = shanghaiNow.getUTCDate();
+            const age = y - 2004 - (m < 2 || (m === 2 && d < 27) ? 1 : 0);
+            const el = document.getElementById("bio-age");
+            if (!el) return;
+            const baseMap = {
+                zh: el.dataset.ageZh,
+                ja: "北京でプロダクトをつくっています。ツールをつくり、複雑なことをわかりやすく伝えるのが好きです。",
+                fr: "Je conçois des produits à Beijing. J’aime créer des outils et clarifier les choses compliquées.",
+                ru: "Я делаю продукты в Пекине. Люблю создавать инструменты и ясно объяснять сложные вещи.",
+                en: el.dataset.ageEn
+            };
+            const baseText = baseMap[lang] || baseMap.en;
+            if (lang === "zh") {
+                el.textContent = `${age}岁，${baseText}`;
+            } else if (lang === "ja") {
+                el.textContent = `${age}歳。${baseText}`;
+            } else if (lang === "fr") {
+                el.textContent = `${age} ans. ${baseText}`;
+            } else if (lang === "ru") {
+                el.textContent = `${age} years old. ${baseText}`;
+            } else {
+                el.textContent = `${age}. ${baseText}`;
+            }
+        }
+
+        function setLanguage(lang) {
+            const dict = translations[lang] || translations.en;
+            document.documentElement.lang = dict.pageLang;
+            localStorage.setItem("language", lang);
+
+            document.querySelectorAll("[data-i18n]").forEach((node) => {
+                const key = node.dataset.i18n;
+                if (dict[key]) node.textContent = dict[key];
+            });
+
+            document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+                const key = node.dataset.i18nHtml;
+                if (dict[key]) node.innerHTML = dict[key];
+            });
+
+            document.querySelectorAll(".lang-btn").forEach((btn) => {
+                btn.classList.toggle("is-active", btn.dataset.lang === lang);
+            });
+
+            updateAgeText(lang);
+        }
+
         function toggleTheme() {
             const html = document.documentElement;
             const btn = document.querySelector(".theme-toggle");
@@ -476,13 +654,8 @@
         })();
 
         (function () {
-            const shanghaiNow = new Date(Date.now() + 8 * 3600000);
-            const y = shanghaiNow.getUTCFullYear();
-            const m = shanghaiNow.getUTCMonth();
-            const d = shanghaiNow.getUTCDate();
-            const age = y - 2004 - (m < 2 || (m === 2 && d < 27) ? 1 : 0);
-            const el = document.getElementById("bio-age");
-            if (el) el.textContent = age + "岁，" + el.textContent;
+            const savedLanguage = localStorage.getItem("language") || "en";
+            setLanguage(savedLanguage);
         })();
     </script>
 </body>
