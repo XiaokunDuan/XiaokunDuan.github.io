@@ -423,6 +423,10 @@
             background: radial-gradient(circle, rgba(42, 157, 143, 0.22) 0%, rgba(42, 157, 143, 0.1) 42%, rgba(42, 157, 143, 0.02) 72%, transparent 100%);
         }
 
+        .project[data-category="learning"]::before {
+            background: radial-gradient(circle, rgba(119, 199, 184, 0.28) 0%, rgba(119, 199, 184, 0.11) 42%, rgba(119, 199, 184, 0.02) 72%, transparent 100%);
+        }
+
         .project[data-category="news"]::before {
             background: radial-gradient(circle, rgba(38, 70, 83, 0.2) 0%, rgba(38, 70, 83, 0.085) 42%, rgba(38, 70, 83, 0.02) 72%, transparent 100%);
         }
@@ -447,6 +451,10 @@
 
         [data-theme="dark"] .project[data-category="reading"]::before {
             background: radial-gradient(circle, rgba(119, 199, 184, 0.2) 0%, rgba(119, 199, 184, 0.08) 42%, rgba(119, 199, 184, 0.02) 72%, transparent 100%);
+        }
+
+        [data-theme="dark"] .project[data-category="learning"]::before {
+            background: radial-gradient(circle, rgba(129, 216, 200, 0.24) 0%, rgba(129, 216, 200, 0.1) 42%, rgba(129, 216, 200, 0.02) 72%, transparent 100%);
         }
 
         [data-theme="dark"] .project[data-category="news"]::before {
@@ -761,6 +769,14 @@
             <section class="section">
                 <div class="section-label" data-i18n="labelWork">Selected Work</div>
                 <div class="section-body projects">
+                    <article class="project" data-category="learning">
+                        <div>
+                            <a class="project-link" href="https://www.yulu34.top" target="_blank" rel="noopener">snapshot</a>
+                            <p class="project-desc" data-i18n="snapshotDesc">An image-first English learning app. Upload a picture, extract a word with AI, and keep the result in history, check-ins, and word books.</p>
+                        </div>
+                        <div class="project-meta" data-i18n="snapshotMeta">Learning App</div>
+                    </article>
+
                     <article class="project" data-category="reading">
                         <div>
                             <a class="project-link" href="https://github.com/XiaokunDuan/reader" target="_blank" rel="noopener">reader</a>
@@ -889,6 +905,8 @@
                 labelAbout: "About",
                 aboutTitle: "Not a resume.",
                 labelWork: "Selected Work",
+                snapshotDesc: "An image-first English learning app. Upload a picture, extract a word with AI, and keep the result in history, check-ins, and word books.",
+                snapshotMeta: "Learning App",
                 readerDesc: "A reading tool for long articles and papers. I use it to mark, ask questions, and keep notes together.",
                 readerMeta: "Reading System",
                 newsDesc: "A daily news watcher built on RSS. It pulls things in, sorts them, and sends them where I actually read.",
@@ -927,6 +945,8 @@
                 labelAbout: "关于",
                 aboutTitle: "不是简历。",
                 labelWork: "作品",
+                snapshotDesc: "一个拍图学英语应用。上传图片后用 AI 提取单词，并把结果保存到历史、打卡和单词本里。",
+                snapshotMeta: "学习应用",
                 readerDesc: "一个给长文章和论文用的阅读工具。我主要拿它做标记、追问和整理笔记。",
                 readerMeta: "阅读系统",
                 newsDesc: "一个基于 RSS 的日常新闻收集工具，会把东西拉进来、排一下，再送到我真正会看的地方。",
@@ -965,6 +985,8 @@
                 labelAbout: "概要",
                 aboutTitle: "履歴書ではありません。",
                 labelWork: "主な仕事",
+                snapshotDesc: "画像から英単語を学ぶアプリです。写真をアップロードすると、AI が単語を抽出し、履歴や学習記録に保存します。",
+                snapshotMeta: "学習アプリ",
                 readerDesc: "長い記事や論文のための読書ツールです。線を引いたり、問いを残したり、メモをまとめたりするのに使っています。",
                 readerMeta: "読書システム",
                 newsDesc: "RSS を使った日々のニュース整理ツールです。集めて、並べて、自分が本当に読む場所へ送ります。",
@@ -994,6 +1016,8 @@
                 labelAbout: "À propos",
                 aboutTitle: "Pas un CV.",
                 labelWork: "Projets choisis",
+                snapshotDesc: "Une application d’anglais centrée sur l’image. On envoie une photo, l’IA extrait un mot, puis l’enregistre dans l’historique et les carnets.",
+                snapshotMeta: "Appli d’apprentissage",
                 readerDesc: "Un outil de lecture pour les longs articles et les papiers. Je m’en sers pour annoter, poser des questions et garder mes notes ensemble.",
                 readerMeta: "Système de lecture",
                 newsDesc: "Un outil de veille quotidienne basé sur RSS. Il récupère, trie, puis envoie les choses là où je les lis vraiment.",
@@ -1023,6 +1047,8 @@
                 labelAbout: "Обо мне",
                 aboutTitle: "Не резюме.",
                 labelWork: "Избранные проекты",
+                snapshotDesc: "Приложение для изучения английского по изображениям. Загружаете фото, AI извлекает слово и сохраняет его в историю и учебные записи.",
+                snapshotMeta: "Учебное приложение",
                 readerDesc: "Инструмент для чтения длинных статей и научных текстов. Я использую его, чтобы отмечать важное, задавать вопросы и держать заметки вместе.",
                 readerMeta: "Система чтения",
                 newsDesc: "Инструмент для ежедневного просмотра новостей на RSS. Он собирает, сортирует и отправляет материалы туда, где я действительно их читаю.",
