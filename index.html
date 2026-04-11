@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xiaokun Duan</title>
     <meta property="og:title" content="Xiaokun Duan">
-    <meta property="og:description" content="Xiaokun Duan in Beijing. Product, code, papers, tools, and recent notes.">
+    <meta property="og:description" content="Xiaokun Duan in Beijing. Product, code, papers, and tools.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -263,6 +263,26 @@
             color: var(--secondary);
             position: relative;
             z-index: 1;
+        }
+
+        .hero-quote {
+            margin-top: 18px;
+            max-width: 38rem;
+            padding-left: 18px;
+            border-left: 2px solid var(--line-strong);
+            color: var(--text);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .hero-quote cite {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-style: normal;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
         .hero-copy strong {
@@ -741,14 +761,18 @@
                     <img src="assets/avatar.jpeg" class="avatar" alt="Xiaokun Duan">
                     <span>
                         <span class="meta-label" data-i18n="metaLabel">段晓坤</span>
-                        <span class="meta-sub" data-i18n="metaSub">Beijing · product · code · papers</span>
+                        <span class="meta-sub" data-i18n="metaSub">Beijing · product · code · systems</span>
                     </span>
                 </div>
                 <h1 data-i18n-html="heroName"><span class="accent">段</span>晓坤</h1>
-                <p class="hero-tagline" data-i18n="heroTagline">I live in Beijing, make products, write code, and read papers.</p>
+                <p class="hero-tagline" data-i18n="heroTagline">Building products, writing code, reading papers.</p>
                 <p class="hero-copy">
-                    <span data-i18n-html="heroCopy">Most days I am building product ideas, cleaning up notes from papers, or making small tools for myself. Lately I have been spending a lot of time on reading, automation, and the odd feeling that useful software should be a little easier to live with.</span>
+                    <span data-i18n-html="heroCopy">Most days I work on product ideas, read papers, and turn repetitive tasks into small tools.</span>
                 </p>
+                <blockquote class="hero-quote">
+                    <span data-i18n-html="heroQuote">Taste classifies, and it classifies the classifier.</span>
+                    <cite data-i18n="heroQuoteBy">Pierre Bourdieu</cite>
+                </blockquote>
                 <nav class="hero-links">
                     <a href="https://github.com/XiaokunDuan" target="_blank" rel="noopener">GitHub</a>
                 </nav>
@@ -759,8 +783,8 @@
             <section class="section">
                 <div class="section-label" data-i18n="labelAbout">About</div>
                 <div class="section-body">
-                    <h2 class="section-title" data-i18n="aboutTitle">Not a resume.</h2>
-                    <p class="about-text" id="bio-age" data-age-en="I usually bounce between product work, coding, and reading papers. When I get tired of doing the same thing twice, I end up making a tool for it." data-age-zh="平时会在产品、写代码和看论文之间来回切换。要是一个动作重复做了太多次，我大概率就会给它做个小工具。">I usually bounce between product work, coding, and reading papers. When I get tired of doing the same thing twice, I end up making a tool for it.</p>
+                    <h2 class="section-title" data-i18n="aboutTitle">Work, not persona.</h2>
+                    <p class="about-text" id="bio-age" data-age-en="I work across product, code, and research notes. If a workflow repeats often enough, I usually automate it." data-age-zh="我主要做产品、写代码，也整理研究笔记。一个流程只要重复得足够多，我通常就会把它自动化。">I work across product, code, and research notes. If a workflow repeats often enough, I usually automate it.</p>
                 </div>
             </section>
 
@@ -888,12 +912,14 @@
                 title: "Xiaokun Duan",
                 pageLang: "en",
                 metaLabel: "Xiaokun Duan",
-                metaSub: "Beijing · product · code · papers",
+                metaSub: "Beijing · product · code · systems",
                 heroName: "<span class=\"accent\">Xiaokun</span> Duan",
-                heroTagline: "I live in Beijing, make products, write code, and read papers.",
-                heroCopy: "Most days I am building product ideas, cleaning up notes from papers, or making small tools for myself. Lately I have been spending a lot of time on reading, automation, and the odd feeling that useful software should be a little easier to live with.",
+                heroTagline: "Building products, writing code, reading papers.",
+                heroCopy: "Most days I work on product ideas, read papers, and turn repetitive tasks into small tools.",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
                 labelAbout: "About",
-                aboutTitle: "Not a resume.",
+                aboutTitle: "Work, not persona.",
                 labelWork: "Selected Work",
                 snapshotDesc: "An image-first English learning app. Upload a picture, extract a word with AI, and keep the result in history, check-ins, and word books.",
                 snapshotMeta: "Learning App",
@@ -926,12 +952,14 @@
                 title: "段晓坤",
                 pageLang: "zh-CN",
                 metaLabel: "段晓坤",
-                metaSub: "北京 · 产品 · 代码 · 论文",
+                metaSub: "北京 · 产品 · 代码 · 系统",
                 heroName: "<span class=\"accent\">段</span>晓坤",
-                heroTagline: "我在北京，做产品，写代码，也看论文。",
-                heroCopy: "大多数时候，我不是在琢磨产品，就是在整理论文里的东西，或者给自己做一点顺手的小工具。最近花时间比较多的还是阅读、自动化，还有那种“软件其实可以更好用一点”的小念头。",
+                heroTagline: "做产品，写代码，读论文。",
+                heroCopy: "大多数时候，我在做产品、读论文，或者把重复任务做成小工具。",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
                 labelAbout: "关于",
-                aboutTitle: "不是简历。",
+                aboutTitle: "作品，不是人设。",
                 labelWork: "作品",
                 snapshotDesc: "一个拍图学英语应用。上传图片后用 AI 提取单词，并把结果保存到历史、打卡和单词本里。",
                 snapshotMeta: "学习应用",
@@ -964,12 +992,14 @@
                 title: "Xiaokun Duan",
                 pageLang: "ja",
                 metaLabel: "Xiaokun Duan",
-                metaSub: "Beijing · product · code · papers",
+                metaSub: "Beijing · product · code · systems",
                 heroName: "<span class=\"accent\">Xiaokun</span> Duan",
-                heroTagline: "北京で暮らしながら、プロダクトをつくり、コードを書き、論文も読んでいます。",
-                heroCopy: "普段はプロダクトのことを考えるか、論文の内容を整理するか、自分用の小さな道具をつくっています。最近は読書と自動化、それからソフトウェアはもう少し自然に使えていいはずだ、ということをよく考えています。",
+                heroTagline: "プロダクトをつくり、コードを書き、論文を読む。",
+                heroCopy: "普段はプロダクトづくり、論文の読解、反復作業を小さなツールにすることに時間を使っています。",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
                 labelAbout: "概要",
-                aboutTitle: "履歴書ではありません。",
+                aboutTitle: "仕事の記録。",
                 labelWork: "主な仕事",
                 snapshotDesc: "画像から英単語を学ぶアプリです。写真をアップロードすると、AI が単語を抽出し、履歴や学習記録に保存します。",
                 snapshotMeta: "学習アプリ",
@@ -993,12 +1023,14 @@
                 title: "Xiaokun Duan",
                 pageLang: "fr",
                 metaLabel: "Xiaokun Duan",
-                metaSub: "Beijing · produit · code · papiers",
+                metaSub: "Beijing · produit · code · systèmes",
                 heroName: "<span class=\"accent\">Xiaokun</span> Duan",
-                heroTagline: "Je vis à Beijing, je fais des produits, j’écris du code et je lis des papiers.",
-                heroCopy: "La plupart du temps, je réfléchis à des idées de produit, je range ce que je lis dans les papiers, ou je me fabrique de petits outils. En ce moment, je passe beaucoup de temps sur la lecture, l’automatisation, et cette impression qu’un logiciel utile devrait être un peu plus facile à vivre.",
+                heroTagline: "Construire des produits, écrire du code, lire des papiers.",
+                heroCopy: "Je travaille surtout sur des idées produit, la lecture de papiers, et l’automatisation des tâches répétitives avec de petits outils.",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
                 labelAbout: "À propos",
-                aboutTitle: "Pas un CV.",
+                aboutTitle: "Le travail, pas le personnage.",
                 labelWork: "Projets choisis",
                 snapshotDesc: "Une application d’anglais centrée sur l’image. On envoie une photo, l’IA extrait un mot, puis l’enregistre dans l’historique et les carnets.",
                 snapshotMeta: "Appli d’apprentissage",
@@ -1022,12 +1054,14 @@
                 title: "Xiaokun Duan",
                 pageLang: "ru",
                 metaLabel: "Xiaokun Duan",
-                metaSub: "Пекин · продукт · код · статьи",
+                metaSub: "Пекин · продукт · код · системы",
                 heroName: "<span class=\"accent\">Xiaokun</span> Duan",
-                heroTagline: "Я живу в Пекине, делаю продукты, пишу код и читаю статьи.",
-                heroCopy: "Обычно я либо думаю о продуктовых идеях, либо разбираю то, что читаю в статьях, либо делаю себе маленькие инструменты. В последнее время у меня много времени уходит на чтение, автоматизацию и на мысль о том, что полезный софт мог бы быть чуть удобнее в жизни.",
+                heroTagline: "Делаю продукты, пишу код, читаю статьи.",
+                heroCopy: "В основном я работаю над продуктами, читаю статьи и превращаю повторяющиеся задачи в небольшие инструменты.",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
                 labelAbout: "Обо мне",
-                aboutTitle: "Не резюме.",
+                aboutTitle: "Работа, а не образ.",
                 labelWork: "Избранные проекты",
                 snapshotDesc: "Приложение для изучения английского по изображениям. Загружаете фото, AI извлекает слово и сохраняет его в историю и учебные записи.",
                 snapshotMeta: "Учебное приложение",
