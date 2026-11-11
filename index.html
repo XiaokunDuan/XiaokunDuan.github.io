@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xiaokun Duan</title>
+    <meta property="og:title" content="Xiaokun Duan">
+    <meta property="og:description" content="Xiaokun Duan in Beijing. Product, code, papers, and tools.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f7f3eb;
+            --bg-soft: rgba(247, 243, 235, 0.92);
+            --panel: rgba(247, 243, 235, 0.76);
+            --panel-strong: rgba(248, 244, 236, 0.9);
+            --text: #264653;
+            --secondary: #49666a;
+            --muted: #6b8383;
+            --accent: #2a9d8f;
+            --accent-soft: rgba(42, 157, 143, 0.12);
+            --line: rgba(38, 70, 83, 0.09);
+            --line-strong: rgba(38, 70, 83, 0.16);
+            --shadow: 0 18px 48px rgba(38, 70, 83, 0.04);
+            --panel-shadow: 0 14px 34px rgba(38, 70, 83, 0.03);
+            --tile-shadow: 0 10px 22px rgba(38, 70, 83, 0.025);
+            --hero-size: clamp(3.2rem, 7vw, 5rem);
+            --tagline-size: clamp(1.3rem, 2.8vw, 1.7rem);
+            --title-size: clamp(1.15rem, 2vw, 1.45rem);
+            --body-size: 1rem;
+            --small-size: 0.8rem;
+            --space-1: 10px;
+            --space-2: 18px;
+            --space-3: 28px;
+            --space-4: 44px;
+            --space-5: 72px;
+            --space-6: 112px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #16262d;
+            --bg-soft: rgba(22, 38, 45, 0.88);
+            --panel: rgba(28, 44, 49, 0.74);
+            --panel-strong: rgba(31, 48, 53, 0.86);
+            --text: #ecf1ed;
+            --secondary: #b6c6c2;
+            --muted: #89a09e;
+            --accent: #77c7b8;
+            --accent-soft: rgba(119, 199, 184, 0.16);
+            --line: rgba(233, 196, 106, 0.1);
+            --line-strong: rgba(233, 196, 106, 0.18);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
+            --panel-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
+            --tile-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Manrope", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", sans-serif;
+            background:
+                linear-gradient(132deg, rgba(38, 70, 83, 0.11) 0%, rgba(42, 157, 143, 0.09) 24%, rgba(233, 196, 106, 0.08) 49%, rgba(244, 162, 97, 0.06) 73%, rgba(231, 111, 81, 0.045) 100%),
+                radial-gradient(circle at 13% 12%, rgba(42, 157, 143, 0.08), transparent 24%),
+                radial-gradient(circle at 78% 10%, rgba(233, 196, 106, 0.075), transparent 19%),
+                radial-gradient(circle at 66% 68%, rgba(244, 162, 97, 0.055), transparent 22%),
+                radial-gradient(circle at 88% 78%, rgba(231, 111, 81, 0.045), transparent 18%),
+                linear-gradient(180deg, rgba(247, 243, 235, 0.74), transparent 34%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .controls {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0 4px 12px;
+            border-radius: 16px;
+            background: rgba(247, 243, 235, 0.78);
+            border: 1px solid var(--line);
+            box-shadow: 0 8px 20px rgba(38, 70, 83, 0.04);
+            animation: fadeUp 0.34s ease both;
+            animation-delay: 0.1s;
+        }
+
+        [data-theme="dark"] .controls {
+            background: rgba(22, 38, 45, 0.84);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+        }
+
+        .lang-switcher {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            padding-right: 10px;
+            border-right: 1px solid var(--line);
+        }
+
+        .lang-btn,
+        .theme-toggle {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.16s ease, background-color 0.16s ease;
+            min-height: 26px;
+            padding: 0 8px;
+            border-radius: 10px;
+        }
+
+        .lang-btn {
+            opacity: 0.72;
+        }
+
+        .lang-btn.is-active {
+            color: var(--text);
+            opacity: 1;
+            background: rgba(42, 157, 143, 0.12);
+        }
+
+        .lang-btn:hover,
+        .theme-toggle:hover {
+            color: var(--text);
+            opacity: 1;
+            background: rgba(38, 70, 83, 0.05);
+        }
+
+        .page {
+            width: min(1120px, calc(100vw - 48px));
+            margin: 0 auto;
+            padding: 88px 0 64px;
+        }
+
+        .hero {
+            max-width: 760px;
+            min-height: min(72vh, 760px);
+            padding-bottom: var(--space-5);
+        }
+
+        .hero-main {
+            max-width: 720px;
+            padding: 12px 0 10px;
+            border-radius: 0;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            animation: fadeUp 0.38s ease both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--space-3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 22px;
+            object-fit: cover;
+            object-position: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.62);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .meta-label {
+            font-size: var(--small-size);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .meta-sub {
+            display: block;
+            margin-top: 4px;
+            color: var(--secondary);
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+        }
+
+        .hero h1 {
+            font-family: "Newsreader", Georgia, serif;
+            font-size: var(--hero-size);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-weight: 600;
+            max-width: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 .accent {
+            display: inline;
+            padding-right: 0;
+            margin-right: 0;
+            border-right: none;
+        }
+
+        .hero-tagline {
+            margin-top: 14px;
+            max-width: 24ch;
+            font-size: var(--tagline-size);
+            line-height: 1.12;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: -0.03em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-copy {
+            margin-top: 26px;
+            max-width: 34rem;
+            font-size: 1.02rem;
+            color: var(--secondary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-quote {
+            margin-top: 18px;
+            max-width: 38rem;
+            padding-left: 18px;
+            border-left: 2px solid var(--line-strong);
+            color: var(--text);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .hero-quote cite {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-style: normal;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero-copy strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: var(--space-4);
+            padding-top: 0;
+            border-top: none;
+            animation: fadeUp 0.4s ease both;
+            animation-delay: 0.06s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-links a,
+        .writing-link,
+        .project-link {
+            text-decoration: none;
+        }
+
+        .hero-links a {
+            position: relative;
+            color: var(--secondary);
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: color 0.16s ease;
+        }
+
+        .hero-links a::after,
+        .writing-link::after,
+        .project-link::after {
+            content: " ↗";
+            color: var(--accent);
+            transition: transform 0.16s ease;
+            display: inline-block;
+        }
+
+        .hero-links a:hover,
+        .writing-link:hover,
+        .project-link:hover {
+            color: var(--accent);
+        }
+
+        .hero-links a:hover::after,
+        .writing-link:hover::after,
+        .project-link:hover::after {
+            transform: translate(2px, -2px);
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 160px minmax(0, 1fr);
+            gap: var(--space-4);
+        }
+
+        .section {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: subgrid;
+            padding: 52px 0;
+            border-top: 1px solid var(--line);
+            opacity: 0;
+            animation: fadeUp 0.42s ease both;
+        }
+
+        .layout .section:nth-of-type(1) {
+            animation-delay: 0.18s;
+        }
+
+        .layout .section:nth-of-type(2) {
+            animation-delay: 0.26s;
+        }
+
+        .layout .section:nth-of-type(3) {
+            animation-delay: 0.34s;
+        }
+
+        .section-label {
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding-top: 4px;
+        }
+
+        .section-body {
+            min-width: 0;
+        }
+
+        .section-title {
+            font-family: "Newsreader", Georgia, serif;
+            font-size: var(--title-size);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .about-text {
+            font-size: 1rem;
+            color: var(--secondary);
+            max-width: 46rem;
+            padding: 22px 24px;
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            background: rgba(247, 243, 235, 0.58);
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] .about-text {
+            background: rgba(28, 44, 49, 0.62);
+        }
+
+        .projects {
+            display: grid;
+            gap: 22px;
+        }
+
+        .project {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 140px;
+            gap: 20px;
+            align-items: start;
+            padding: 22px 24px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            box-shadow: none;
+            transition: border-color 0.18s ease, background-color 0.18s ease;
+            overflow: hidden;
+        }
+
+        .project::before {
+            content: "";
+            position: absolute;
+            inset: -18% auto -18% -10%;
+            width: 180px;
+            border-radius: 999px;
+            pointer-events: none;
+            filter: blur(22px);
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project[data-category="reading"]::before {
+            background: radial-gradient(circle, rgba(42, 157, 143, 0.22) 0%, rgba(42, 157, 143, 0.1) 42%, rgba(42, 157, 143, 0.02) 72%, transparent 100%);
+        }
+
+        .project[data-category="learning"]::before {
+            background: radial-gradient(circle, rgba(119, 199, 184, 0.28) 0%, rgba(119, 199, 184, 0.11) 42%, rgba(119, 199, 184, 0.02) 72%, transparent 100%);
+        }
+
+        .project[data-category="news"]::before {
+            background: radial-gradient(circle, rgba(38, 70, 83, 0.2) 0%, rgba(38, 70, 83, 0.085) 42%, rgba(38, 70, 83, 0.02) 72%, transparent 100%);
+        }
+
+        .project[data-category="automation"]::before {
+            background: radial-gradient(circle, rgba(233, 196, 106, 0.26) 0%, rgba(233, 196, 106, 0.12) 42%, rgba(233, 196, 106, 0.03) 72%, transparent 100%);
+        }
+
+        .project:hover {
+            background: rgba(248, 244, 236, 0.84);
+            border-color: var(--line-strong);
+        }
+
+        [data-theme="dark"] .project:hover {
+            background: rgba(31, 48, 53, 0.82);
+            border-color: var(--line-strong);
+        }
+
+        [data-theme="dark"] .project::before {
+            opacity: 0.28;
+        }
+
+        [data-theme="dark"] .project[data-category="reading"]::before {
+            background: radial-gradient(circle, rgba(119, 199, 184, 0.2) 0%, rgba(119, 199, 184, 0.08) 42%, rgba(119, 199, 184, 0.02) 72%, transparent 100%);
+        }
+
+        [data-theme="dark"] .project[data-category="learning"]::before {
+            background: radial-gradient(circle, rgba(129, 216, 200, 0.24) 0%, rgba(129, 216, 200, 0.1) 42%, rgba(129, 216, 200, 0.02) 72%, transparent 100%);
+        }
+
+        [data-theme="dark"] .project[data-category="news"]::before {
+            background: radial-gradient(circle, rgba(182, 198, 194, 0.14) 0%, rgba(182, 198, 194, 0.06) 42%, rgba(182, 198, 194, 0.015) 72%, transparent 100%);
+        }
+
+        [data-theme="dark"] .project[data-category="automation"]::before {
+            background: radial-gradient(circle, rgba(233, 196, 106, 0.16) 0%, rgba(233, 196, 106, 0.075) 42%, rgba(233, 196, 106, 0.02) 72%, transparent 100%);
+        }
+
+        .project-link {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .project-desc {
+            margin-top: 6px;
+            font-size: 0.94rem;
+            color: var(--secondary);
+            max-width: 42rem;
+        }
+
+        .project-meta {
+            justify-self: end;
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            padding: 0 11px;
+            border-radius: 10px;
+            background: rgba(42, 157, 143, 0.05);
+            color: var(--accent);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: 1px solid rgba(42, 157, 143, 0.08);
+        }
+
+        .writing-list {
+            display: grid;
+            gap: 16px;
+            list-style: none;
+        }
+
+        .writing-item {
+            display: grid;
+            grid-template-columns: 104px minmax(0, 1fr);
+            gap: 14px;
+            align-items: start;
+            padding: 14px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            box-shadow: none;
+            transition: background-color 0.18s ease, border-color 0.18s ease;
+        }
+
+        .writing-item:hover {
+            border-color: var(--line-strong);
+            background: rgba(248, 244, 236, 0.84);
+        }
+
+        [data-theme="dark"] .writing-item:hover {
+            background: rgba(31, 48, 53, 0.82);
+        }
+
+        .writing-item > a {
+            position: relative;
+            display: block;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .writing-item > a::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(38, 70, 83, 0.025), rgba(38, 70, 83, 0.06));
+            pointer-events: none;
+        }
+
+        .writing-cover {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: contain;
+            display: block;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.94);
+            padding: 8px;
+            filter: saturate(0.9) contrast(0.98);
+        }
+
+        [data-theme="dark"] .writing-cover {
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .writing-content {
+            min-width: 0;
+        }
+
+        .writing-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .writing-title {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .writing-title::after {
+            content: " ↗";
+            color: var(--accent);
+            transition: transform 0.16s ease;
+            display: inline-block;
+        }
+
+        .writing-title:hover {
+            color: var(--accent);
+        }
+
+        .writing-title:hover::after {
+            transform: translate(2px, -2px);
+        }
+
+        .writing-date {
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .writing-summary {
+            font-size: 0.94rem;
+            color: var(--secondary);
+        }
+
+        footer {
+            margin-top: var(--space-6);
+            padding-top: var(--space-3);
+            border-top: 1px solid var(--line);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        footer code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: inherit;
+        }
+
+        @media (max-width: 900px) {
+            .page {
+                width: min(100vw - 36px, 760px);
+                padding-top: 76px;
+            }
+
+            .controls {
+                top: 16px;
+                right: 16px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .layout,
+            .section {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .controls {
+                gap: 8px;
+                padding: 4px 0 4px 10px;
+            }
+
+            .lang-switcher {
+                gap: 2px;
+                padding-right: 3px;
+            }
+
+            .lang-btn,
+            .theme-toggle {
+                min-height: 26px;
+                padding: 0 8px;
+                font-size: 0.66rem;
+            }
+
+            .hero-main {
+                padding: 10px 0 8px;
+            }
+
+            .project {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .writing-item {
+                grid-template-columns: 1fr;
+            }
+
+            .project-meta {
+                justify-self: start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                width: min(100vw - 28px, 560px);
+                padding-top: 68px;
+                padding-bottom: 48px;
+            }
+
+            .section {
+                padding: 34px 0;
+            }
+
+            .controls {
+                top: 12px;
+                right: 12px;
+                max-width: calc(100vw - 24px);
+                overflow-x: auto;
+            }
+
+            .avatar {
+                width: 64px;
+                height: 64px;
+                border-radius: 18px;
+            }
+
+            .hero-main {
+                padding: 8px 0 6px;
+            }
+
+            .hero-copy,
+            .hero-tagline {
+                font-size: 1rem;
+            }
+
+            .hero-links {
+                gap: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+        <div class="controls">
+        <div class="lang-switcher" aria-label="Language switcher">
+            <button class="lang-btn is-active" data-lang="en" onclick="setLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="zh" onclick="setLanguage('zh')">中文</button>
+            <button class="lang-btn" data-lang="ja" onclick="setLanguage('ja')">日本語</button>
+            <button class="lang-btn" data-lang="fr" onclick="setLanguage('fr')">FR</button>
+            <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">dark</button>
+    </div>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-main">
+                <div class="hero-meta">
+                    <img src="assets/avatar.jpeg" class="avatar" alt="Xiaokun Duan">
+                    <span>
+                        <span class="meta-label" data-i18n="metaLabel">段晓坤</span>
+                        <span class="meta-sub" data-i18n="metaSub">Beijing · product · code · systems</span>
+                    </span>
+                </div>
+                <h1 data-i18n-html="heroName"><span class="accent">段</span>晓坤</h1>
+                <p class="hero-tagline" data-i18n="heroTagline">Building products, writing code, reading papers.</p>
+                <p class="hero-copy">
+                    <span data-i18n-html="heroCopy">Most days I work on product ideas, read papers, and turn repetitive tasks into small tools.</span>
+                </p>
+                <blockquote class="hero-quote">
+                    <span data-i18n-html="heroQuote">Taste classifies, and it classifies the classifier.</span>
+                    <cite data-i18n="heroQuoteBy">Pierre Bourdieu</cite>
+                </blockquote>
+                <nav class="hero-links">
+                    <a href="https://github.com/XiaokunDuan" target="_blank" rel="noopener">GitHub</a>
+                </nav>
+            </div>
+        </section>
+
+        <div class="layout">
+            <section class="section">
+                <div class="section-label" data-i18n="labelAbout">About</div>
+                <div class="section-body">
+                    <h2 class="section-title" data-i18n="aboutTitle">Work, not persona.</h2>
+                    <p class="about-text" id="bio-age" data-age-en="I work across product, code, and research notes. If a workflow repeats often enough, I usually automate it." data-age-zh="我主要做产品、写代码，也整理研究笔记。一个流程只要重复得足够多，我通常就会把它自动化。">I work across product, code, and research notes. If a workflow repeats often enough, I usually automate it.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-label" data-i18n="labelWork">Selected Work</div>
+                <div class="section-body projects">
+                    <article class="project" data-category="learning">
+                        <div>
+                            <a class="project-link" href="https://github.com/XiaokunDuan/curiosity-skill" target="_blank" rel="noopener">curiosity-skill</a>
+                            <p class="project-desc" data-i18n="curDesc">An agent skill for cross-disciplinary learning. It explains the problem a concept was invented to solve, ends each answer with follow-up questions, and keeps a local memory of what you have explored.</p>
+                        </div>
+                        <div class="project-meta" data-i18n="curMeta">Agent Skill</div>
+                    </article>
+
+                    <article class="project" data-category="automation">
+                        <div>
+                            <a class="project-link" href="https://github.com/XiaokunDuan/hammerspoon-config" target="_blank" rel="noopener">hammerspoon-config</a>
+                            <p class="project-desc" data-i18n="hamDesc">My Hammerspoon setup for macOS. It handles windows, quick capture, app switching, and a few annoying little chores.</p>
+                        </div>
+                        <div class="project-meta" data-i18n="hamMeta">Mac Automation</div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-label" data-i18n="labelWriting">Writing</div>
+                <div class="section-body">
+                    <h2 class="section-title" data-i18n="writingTitle">Current writing</h2>
+                    <ul class="writing-list">
+                        <li class="writing-item">
+                            <a href="https://xiaokunduan.github.io/posts/adversarial-robustness-series/" target="_blank" rel="noopener">
+                                <img class="writing-cover" src="https://xiaokunduan.github.io/posts/2025-09-08-adversary-robustness/attack_defense_arms_race.png" alt="Adversarial robustness series cover">
+                            </a>
+                            <div class="writing-content">
+                                <div class="writing-meta">
+                                    <a class="writing-title" href="https://xiaokunduan.github.io/posts/adversarial-robustness-series/" target="_blank" rel="noopener" data-i18n="writingOneTitle">Adversarial Robustness, in 5 Readable Parts</a>
+                                    <span class="writing-date" data-i18n="writingOneDate">Sep 13, 2025</span>
+                                </div>
+                                <p class="writing-summary" data-i18n="writingOneSummary">A shorter entry point to the full robustness essay, reorganized into five linked posts for easier reading and sharing.</p>
+                            </div>
+                        </li>
+                        <li class="writing-item">
+                            <a href="https://xiaokunduan.github.io/posts/part-1-why-ai-is-fragile/" target="_blank" rel="noopener">
+                                <img class="writing-cover" src="https://xiaokunduan.github.io/posts/2025-09-08-adversary-robustness/panda_gibbon_attack.png" alt="Why AI can be brilliant but fragile cover">
+                            </a>
+                            <div class="writing-content">
+                                <div class="writing-meta">
+                                    <a class="writing-title" href="https://xiaokunduan.github.io/posts/part-1-why-ai-is-fragile/" target="_blank" rel="noopener" data-i18n="writingTwoTitle">Why AI Can Be Brilliant but Fragile</a>
+                                    <span class="writing-date" data-i18n="writingTwoDate">Sep 8, 2025</span>
+                                </div>
+                                <p class="writing-summary" data-i18n="writingTwoSummary">A short opening on the central paradox: high-performing systems can still fail under tiny, highly optimized perturbations.</p>
+                            </div>
+                        </li>
+                        <li class="writing-item">
+                            <a href="https://xiaokunduan.github.io/posts/part-2-what-robustness-really-means/" target="_blank" rel="noopener">
+                                <img class="writing-cover" src="https://xiaokunduan.github.io/posts/2025-09-08-adversary-robustness/distribution_convolution.png" alt="What robustness really means cover">
+                            </a>
+                            <div class="writing-content">
+                                <div class="writing-meta">
+                                    <a class="writing-title" href="https://xiaokunduan.github.io/posts/part-2-what-robustness-really-means/" target="_blank" rel="noopener" data-i18n="writingThreeTitle">What Robustness Really Means</a>
+                                    <span class="writing-date" data-i18n="writingThreeDate">Sep 9, 2025</span>
+                                </div>
+                                <p class="writing-summary" data-i18n="writingThreeSummary">A theory-first explanation of Bayes error, gradients, and smooth loss landscapes as the foundations of robustness.</p>
+                            </div>
+                        </li>
+                        <li class="writing-item">
+                            <a href="https://xiaokunduan.github.io/posts/part-3-how-attacks-evolved/" target="_blank" rel="noopener">
+                                <img class="writing-cover" src="https://xiaokunduan.github.io/posts/2025-09-08-adversary-robustness/natural_vs_adversarial_viewpoints.png" alt="How attacks evolved cover">
+                            </a>
+                            <div class="writing-content">
+                                <div class="writing-meta">
+                                    <a class="writing-title" href="https://xiaokunduan.github.io/posts/part-3-how-attacks-evolved/" target="_blank" rel="noopener" data-i18n="writingFourTitle">How Adversarial Attacks Evolved</a>
+                                    <span class="writing-date" data-i18n="writingFourDate">Sep 10, 2025</span>
+                                </div>
+                                <p class="writing-summary" data-i18n="writingFourSummary">From FGSM and PGD to 3D perception, adversarial viewpoints, and attacks on explanation systems.</p>
+                            </div>
+                        </li>
+                        <li class="writing-item">
+                            <a href="https://xiaokunduan.github.io/posts/part-4-how-we-defend-models/" target="_blank" rel="noopener">
+                                <img class="writing-cover" src="https://xiaokunduan.github.io/posts/2025-09-08-adversary-robustness/composite_attack_order_impact.png" alt="How we defend models cover">
+                            </a>
+                            <div class="writing-content">
+                                <div class="writing-meta">
+                                    <a class="writing-title" href="https://xiaokunduan.github.io/posts/part-4-how-we-defend-models/" target="_blank" rel="noopener" data-i18n="writingFiveTitle">How We Defend Models Against Adversarial Attacks</a>
+                                    <span class="writing-date" data-i18n="writingFiveDate">Sep 11, 2025</span>
+                                </div>
+                                <p class="writing-summary" data-i18n="writingFiveSummary">A compact map of adversarial training, data-centric methods, certification, and efficient purification.</p>
+                            </div>
+                        </li>
+                        <li class="writing-item">
+                            <a href="https://xiaokunduan.github.io/posts/part-5-robustness-in-modern-high-stakes-settings/" target="_blank" rel="noopener">
+                                <img class="writing-cover" src="https://xiaokunduan.github.io/posts/2025-09-08-adversary-robustness/commit_framework_idea.png" alt="High-stakes robustness cover">
+                            </a>
+                            <div class="writing-content">
+                                <div class="writing-meta">
+                                    <a class="writing-title" href="https://xiaokunduan.github.io/posts/part-5-robustness-in-modern-high-stakes-settings/" target="_blank" rel="noopener" data-i18n="writingSixTitle">Robustness in Modern Models and High-Stakes Settings</a>
+                                    <span class="writing-date" data-i18n="writingSixDate">Sep 12, 2025</span>
+                                </div>
+                                <p class="writing-summary" data-i18n="writingSixSummary">Why robustness becomes a systems problem once model architecture, deployment context, and asymmetric error costs enter the picture.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <span>© 段晓坤</span>
+            <a href="https://github.com/XiaokunDuan" target="_blank" rel="noopener">GitHub</a>
+        </footer>
+    </main>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Xiaokun Duan",
+                pageLang: "en",
+                metaLabel: "Xiaokun Duan",
+                metaSub: "Beijing · product · code · systems",
+                heroName: "<span class=\"accent\">Xiaokun</span> Duan",
+                heroTagline: "Building products, writing code, reading papers.",
+                heroCopy: "Most days I work on product ideas, read papers, and turn repetitive tasks into small tools.",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
+                labelAbout: "About",
+                aboutTitle: "Work, not persona.",
+                labelWork: "Selected Work",
+                curDesc: "An agent skill for cross-disciplinary learning. It explains the problem a concept was invented to solve, ends each answer with follow-up questions, and keeps a local memory of what you have explored.",
+                curMeta: "Agent Skill",
+                hamDesc: "My Hammerspoon setup for macOS. It handles windows, quick capture, app switching, and a few annoying little chores.",
+                hamMeta: "Mac Automation",
+                labelWriting: "Writing",
+                writingTitle: "Current writing",
+                writingOneTitle: "Adversarial Robustness, in 5 Readable Parts",
+                writingOneDate: "Sep 13, 2025",
+                writingOneSummary: "A shorter entry point to the full robustness essay, reorganized into five linked posts for easier reading and sharing.",
+                writingTwoTitle: "Why AI Can Be Brilliant but Fragile",
+                writingTwoDate: "Sep 8, 2025",
+                writingTwoSummary: "A short opening on the central paradox: high-performing systems can still fail under tiny, highly optimized perturbations.",
+                writingThreeTitle: "What Robustness Really Means",
+                writingThreeDate: "Sep 9, 2025",
+                writingThreeSummary: "A theory-first explanation of Bayes error, gradients, and smooth loss landscapes as the foundations of robustness.",
+                writingFourTitle: "How Adversarial Attacks Evolved",
+                writingFourDate: "Sep 10, 2025",
+                writingFourSummary: "From FGSM and PGD to 3D perception, adversarial viewpoints, and attacks on explanation systems.",
+                writingFiveTitle: "How We Defend Models Against Adversarial Attacks",
+                writingFiveDate: "Sep 11, 2025",
+                writingFiveSummary: "A compact map of adversarial training, data-centric methods, certification, and efficient purification.",
+                writingSixTitle: "Robustness in Modern Models and High-Stakes Settings",
+                writingSixDate: "Sep 12, 2025",
+                writingSixSummary: "Why robustness becomes a systems problem once model architecture, deployment context, and asymmetric error costs enter the picture."
+            },
+            zh: {
+                title: "段晓坤",
+                pageLang: "zh-CN",
+                metaLabel: "段晓坤",
+                metaSub: "北京 · 产品 · 代码 · 系统",
+                heroName: "<span class=\"accent\">段</span>晓坤",
+                heroTagline: "做产品，写代码，读论文。",
+                heroCopy: "大多数时候，我在做产品、读论文，或者把重复任务做成小工具。",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
+                labelAbout: "关于",
+                aboutTitle: "作品，不是人设。",
+                labelWork: "作品",
+                curDesc: "一个跨学科学习的 agent skill：先讲清一个概念当初要解决什么问题，每次回答末尾给出接着问的问题，并在本地记住你学过的东西。",
+                curMeta: "Agent Skill",
+                hamDesc: "我自己在 macOS 上用的 Hammerspoon 配置，主要管窗口、快速记录、应用切换，还有一些烦人的小重复动作。",
+                hamMeta: "Mac 自动化",
+                labelWriting: "写作",
+                writingTitle: "当前文章",
+                writingOneTitle: "Adversarial Robustness, in 5 Readable Parts",
+                writingOneDate: "2025年9月13日",
+                writingOneSummary: "这是整套鲁棒性系列的入口页，把原来的长文拆成了五篇更适合阅读和转发的文章。",
+                writingTwoTitle: "Why AI Can Be Brilliant but Fragile",
+                writingTwoDate: "2025年9月8日",
+                writingTwoSummary: "从一个最基本的问题开始：为什么看起来很强的模型，还是会被极小的扰动轻易骗过。",
+                writingThreeTitle: "What Robustness Really Means",
+                writingThreeDate: "2025年9月9日",
+                writingThreeSummary: "这一篇主要讲鲁棒性到底意味着什么，包括 Bayes error、梯度结构和 loss landscape。",
+                writingFourTitle: "How Adversarial Attacks Evolved",
+                writingFourDate: "2025年9月10日",
+                writingFourSummary: "从 FGSM 和 PGD 出发，一路讲到 3D 感知、视角攻击和解释系统攻击。",
+                writingFiveTitle: "How We Defend Models Against Adversarial Attacks",
+                writingFiveDate: "2025年9月11日",
+                writingFiveSummary: "把主要防御路线压缩成一张图：对抗训练、数据增强、认证和高效净化。",
+                writingSixTitle: "Robustness in Modern Models and High-Stakes Settings",
+                writingSixDate: "2025年9月12日",
+                writingSixSummary: "当模型更现代、场景更昂贵时，鲁棒性就不再只是分类器问题，而是系统问题。"
+            },
+            ja: {
+                title: "Xiaokun Duan",
+                pageLang: "ja",
+                metaLabel: "Xiaokun Duan",
+                metaSub: "Beijing · product · code · systems",
+                heroName: "<span class=\"accent\">Xiaokun</span> Duan",
+                heroTagline: "プロダクトをつくり、コードを書き、論文を読む。",
+                heroCopy: "普段はプロダクトづくり、論文の読解、反復作業を小さなツールにすることに時間を使っています。",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
+                labelAbout: "概要",
+                aboutTitle: "仕事の記録。",
+                labelWork: "主な仕事",
+                curDesc: "分野をまたいで学ぶための agent skill です。概念がどんな問題を解くために生まれたかを説明し、回答の最後に次の質問を示し、学んだ内容をローカルに記憶します。",
+                curMeta: "Agent Skill",
+                hamDesc: "macOS で使っている Hammerspoon 設定です。ウィンドウ操作、メモの取り込み、アプリ切り替え、細かい面倒ごとをまとめています。",
+                hamMeta: "Mac 自動化",
+                labelWriting: "文章",
+                writingTitle: "最近のメモ",
+                writingOneTitle: "なぜ強いモデルでも小さなノイズにだまされるのか",
+                writingOneDate: "Sep 2025",
+                writingOneSummary: "長いノートから切り出した短いメモです。見た目には強いモデルが、なぜこんなに簡単に壊れるのかが気になりました。",
+                writingTwoTitle: "ロバスト性は何と引き換えになるのか",
+                writingTwoDate: "Sep 2025",
+                writingTwoSummary: "ここでは一つの点だけを書いています。モデルに安定性を求めるほど、学習そのものが難しくなるということです。",
+                writingThreeTitle: "攻撃はなぜピクセルから視点や 3D へ広がるのか",
+                writingThreeDate: "Oct 2025",
+                writingThreeSummary: "この部分を切り出したのは、攻撃の形がどんどん奇妙になるからです。画像ノイズだけでなく、視点や 3D、説明の系にも広がっていきます。"
+            },
+            fr: {
+                title: "Xiaokun Duan",
+                pageLang: "fr",
+                metaLabel: "Xiaokun Duan",
+                metaSub: "Beijing · produit · code · systèmes",
+                heroName: "<span class=\"accent\">Xiaokun</span> Duan",
+                heroTagline: "Construire des produits, écrire du code, lire des papiers.",
+                heroCopy: "Je travaille surtout sur des idées produit, la lecture de papiers, et l’automatisation des tâches répétitives avec de petits outils.",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
+                labelAbout: "À propos",
+                aboutTitle: "Le travail, pas le personnage.",
+                labelWork: "Projets choisis",
+                curDesc: "Un skill d’agent pour apprendre entre disciplines. Il explique quel problème un concept devait résoudre, termine chaque réponse par des questions de suite et garde en mémoire locale ce que vous avez exploré.",
+                curMeta: "Skill d’agent",
+                hamDesc: "Ma configuration Hammerspoon sur macOS. Elle gère les fenêtres, la capture rapide, le changement d’app et quelques petites corvées répétitives.",
+                hamMeta: "Automatisation Mac",
+                labelWriting: "Écriture",
+                writingTitle: "Notes récentes",
+                writingOneTitle: "Pourquoi un modèle fort se fait-il piéger par un bruit minuscule ?",
+                writingOneDate: "Sep 2025",
+                writingOneSummary: "Une courte note tirée de mon long texte sur l’apprentissage adversarial. Je revenais toujours à la même question : pourquoi un modèle fort casse-t-il si facilement ?",
+                writingTwoTitle: "Qu’est-ce que la robustesse doit sacrifier ?",
+                writingTwoDate: "Sep 2025",
+                writingTwoSummary: "Ici, je note surtout une idée difficile à ignorer : dès qu’on demande de la stabilité, le problème d’apprentissage devient plus dur.",
+                writingThreeTitle: "Comment les attaques sont-elles passées des pixels aux vues 3D ?",
+                writingThreeDate: "Oct 2025",
+                writingThreeSummary: "J’ai isolé cette partie parce que la surface d’attaque devient vite étrange : du bruit d’image aux points de vue, aux scènes 3D, puis aux systèmes d’explication."
+            },
+            ru: {
+                title: "Xiaokun Duan",
+                pageLang: "ru",
+                metaLabel: "Xiaokun Duan",
+                metaSub: "Пекин · продукт · код · системы",
+                heroName: "<span class=\"accent\">Xiaokun</span> Duan",
+                heroTagline: "Делаю продукты, пишу код, читаю статьи.",
+                heroCopy: "В основном я работаю над продуктами, читаю статьи и превращаю повторяющиеся задачи в небольшие инструменты.",
+                heroQuote: "Taste classifies, and it classifies the classifier.",
+                heroQuoteBy: "Pierre Bourdieu",
+                labelAbout: "Обо мне",
+                aboutTitle: "Работа, а не образ.",
+                labelWork: "Избранные проекты",
+                curDesc: "Agent skill для междисциплинарного обучения. Объясняет, какую задачу решало понятие, заканчивает каждый ответ вопросами для продолжения и хранит локальную память о том, что вы изучили.",
+                curMeta: "Agent skill",
+                hamDesc: "Моя настройка Hammerspoon для macOS. Она помогает с окнами, быстрыми заметками, переключением приложений и мелкими повторяющимися делами.",
+                hamMeta: "Автоматизация Mac",
+                labelWriting: "Тексты",
+                writingTitle: "Недавние заметки",
+                writingOneTitle: "Почему сильную модель можно обмануть крошечным шумом?",
+                writingOneDate: "Sep 2025",
+                writingOneSummary: "Короткая заметка из моего большого текста по adversarial learning. Я все время возвращался к одному вопросу: почему сильные модели так легко ломаются?",
+                writingTwoTitle: "Чем приходится платить за робастность?",
+                writingTwoDate: "Sep 2025",
+                writingTwoSummary: "Здесь я записал мысль, от которой трудно уйти: как только требуешь от модели устойчивости, сама задача обучения становится сложнее.",
+                writingThreeTitle: "Как атаки ушли от пикселей к ракурсам и 3D?",
+                writingThreeDate: "Oct 2025",
+                writingThreeSummary: "Я вынес эту часть отдельно, потому что дальше все становится страннее: от шума на изображении к ракурсам, 3D-сценам и даже системам объяснения."
+            }
+        };
+
+        function updateAgeText(lang) {
+            const shanghaiNow = new Date(Date.now() + 8 * 3600000);
+            const y = shanghaiNow.getUTCFullYear();
+            const m = shanghaiNow.getUTCMonth();
+            const d = shanghaiNow.getUTCDate();
+            const age = y - 2004 - (m < 2 || (m === 2 && d < 27) ? 1 : 0);
+            const el = document.getElementById("bio-age");
+            if (!el) return;
+            const baseMap = {
+                zh: el.dataset.ageZh,
+                ja: "普段はプロダクト、コード、論文のあいだを行ったり来たりしています。同じことを何度もやるのが嫌になると、たいてい小さな道具をつくります。にぎやかすぎるソフトウェアより、静かで役に立つもののほうが好きです。",
+                fr: "Je passe souvent d’un produit au code puis aux papiers. Quand je fais la même chose trop souvent, je finis en général par fabriquer un petit outil. J’aime les logiciels calmes, utiles et pas trop bruyants.",
+                ru: "Обычно я прыгаю между продуктом, кодом и статьями. Если мне приходится делать одно и то же слишком много раз, я обычно делаю для этого маленький инструмент. Мне нравится спокойный, полезный и не слишком шумный софт.",
+                en: el.dataset.ageEn
+            };
+            const baseText = baseMap[lang] || baseMap.en;
+            if (lang === "zh") {
+                el.textContent = `${age}岁，${baseText}`;
+            } else if (lang === "ja") {
+                el.textContent = `${age}歳。${baseText}`;
+            } else if (lang === "fr") {
+                el.textContent = `${age} ans. ${baseText}`;
+            } else if (lang === "ru") {
+                el.textContent = `${age} лет. ${baseText}`;
+            } else {
+                el.textContent = `${age} years old. ${baseText}`;
+            }
+        }
+
+        function setLanguage(lang) {
+            const dict = translations[lang] || translations.en;
+            document.documentElement.lang = dict.pageLang;
+            document.title = dict.title || translations.en.title;
+            localStorage.setItem("language", lang);
+
+            document.querySelectorAll("[data-i18n]").forEach((node) => {
+                const key = node.dataset.i18n;
+                if (dict[key]) node.textContent = dict[key];
+            });
+
+            document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+                const key = node.dataset.i18nHtml;
+                if (dict[key]) node.innerHTML = dict[key];
+            });
+
+            document.querySelectorAll(".lang-btn").forEach((btn) => {
+                btn.classList.toggle("is-active", btn.dataset.lang === lang);
+            });
+
+            updateAgeText(lang);
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const btn = document.querySelector(".theme-toggle");
+            if (html.getAttribute("data-theme") === "dark") {
+                html.removeAttribute("data-theme");
+                btn.textContent = "dark";
+                localStorage.setItem("theme", "light");
+            } else {
+                html.setAttribute("data-theme", "dark");
+                btn.textContent = "light";
+                localStorage.setItem("theme", "dark");
+            }
+        }
+
+        (function () {
+            const saved = localStorage.getItem("theme");
+            const btn = document.querySelector(".theme-toggle");
+            if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-theme", "dark");
+                btn.textContent = "light";
+            }
+        })();
+
+        (function () {
+            const savedLanguage = localStorage.getItem("language") || "en";
+            setLanguage(savedLanguage);
+        })();
+    </script>
+</body>
+</html>
